@@ -54,7 +54,7 @@
 }
 </style>
 </head>
-
+<script src="https://unpkg.com/html5-qrcode"></script>
 <body>
 
 <div class="container">
@@ -100,9 +100,11 @@
 </div>
 
 </div>
-
 <script src="js/config.js"></script>
 <script src="js/admin.js"></script>
+<button onclick="startScan()">📷 Scan QR Presensi</button>
+<div id="reader" style="width:300px;margin-top:20px;"></div>
+<div id="hasil"></div>
 <div style="display:flex; justify-content:space-between; align-items:center;">
   <h2>🏋️ Admin Dashboard</h2>
   <button onclick="logout()" class="logout-btn">Logout</button>
