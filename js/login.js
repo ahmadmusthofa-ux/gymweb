@@ -1,33 +1,39 @@
 async function login(){
   try{
-    console.log("Login diklik");
+    console.log("Klik login...");
 
     const res = await fetch(API_URL,{
       method:"POST",
+      headers:{
+        "Content-Type":"text/plain;charset=utf-8"
+      },
       body: JSON.stringify({
         action:"login",
         data:{
-          email:email.value,
-          password:password.value
+          email:document.getElementById("email").value,
+          password:document.getElementById("password").value
         }
       })
     });
 
     console.log("Response:", res);
 
-    const r = await res.json();
+    const text = await res.text();
+    console.log("RAW:", text);
 
-    console.log("Data:", r);
+    const r = JSON.parse(text);
+    console.log("JSON:", r);
 
     if(r.status==="success"){
       localStorage.setItem("user", JSON.stringify(r.user));
-      location.href="dashboard.html";
+      alert("Login berhasil!");
+      window.location.href="dashboard.html";
     }else{
-      alert("Login gagal");
+      alert("Email / Password salah");
     }
 
   }catch(err){
     console.error("ERROR:", err);
-    alert("Error koneksi ke server");
+    alert("Gagal koneksi ke server");
   }
 }
