@@ -6,3 +6,12 @@ function loginAdmin(){
     alert("Gagal");
   }
 }
+function logout(){
+  if(confirm("Yakin mau logout?")){
+    localStorage.removeItem("admin");
+    window.location.href = "admin-login.html";
+  }
+}
+if(localStorage.getItem("admin")!=="yes"){
+  location.href="admin-login.html";
+}
