@@ -1,0 +1,44 @@
+<h2>Admin Panel</h2>
+
+<div id="data"></div>
+
+<canvas id="chart"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/config.js"></script>
+
+<script>
+if(localStorage.getItem("admin")!=="yes"){
+  location.href="admin-login.html";
+}
+
+// data member
+fetch(API_URL,{
+  method:"POST",
+  body: JSON.stringify({action:"getMembers"})
+})
+.then(r=>r.json())
+.then(r=>{
+  let html="";
+  r.data.forEach(m=>{
+    html+=`<div class="card">${m.nama} - ${m.status}</div>`;
+  });
+  data.innerHTML=html;
+});
+
+// grafik
+fetch(API_URL,{
+  method:"POST",
+  body: JSON.stringify({action:"getStatistik"})
+})
+.then(r=>r.json())
+.then(r=>{
+  new Chart(chart,{
+    type:"line",
+    data:{
+      labels:Object.keys(r.data),
+      datasets:[{data:Object.values(r.data)}]
+    }
+  });
+});
+</script>

@@ -1,0 +1,35 @@
+<div class="container">
+
+<div class="card">
+<h2 id="nama"></h2>
+<p>Status: <span id="status"></span></p>
+<p>Berlaku sampai: <span id="expired"></span></p>
+</div>
+
+<div class="card">
+<h3>QR Presensi</h3>
+<canvas id="qr"></canvas>
+</div>
+
+<div class="card" id="paymentBox">
+<h3>Perpanjang</h3>
+
+<img src="assets/qris.png" class="qris">
+
+<input type="file" id="file">
+<img id="preview" style="display:none;width:100%">
+
+<button onclick="upload()">Upload Bukti</button>
+
+<div id="loading" style="display:none">Uploading...</div>
+</div>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<script src="js/config.js" defer></script>
+<script src="js/dashboard.js" defer></script>
