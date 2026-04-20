@@ -1,44 +1,108 @@
-<h2>Admin Panel</h2>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard</title>
 
-<div id="data"></div>
-
-<canvas id="chart"></canvas>
+<link rel="stylesheet" href="css/style.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="js/config.js"></script>
 
-<script>
-if(localStorage.getItem("admin")!=="yes"){
-  location.href="admin-login.html";
+<style>
+.container{
+  max-width:1200px;
+  margin:auto;
 }
 
-// data member
-fetch(API_URL,{
-  method:"POST",
-  body: JSON.stringify({action:"getMembers"})
-})
-.then(r=>r.json())
-.then(r=>{
-  let html="";
-  r.data.forEach(m=>{
-    html+=`<div class="card">${m.nama} - ${m.status}</div>`;
-  });
-  data.innerHTML=html;
-});
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
 
-// grafik
-fetch(API_URL,{
-  method:"POST",
-  body: JSON.stringify({action:"getStatistik"})
-})
-.then(r=>r.json())
-.then(r=>{
-  new Chart(chart,{
-    type:"line",
-    data:{
-      labels:Object.keys(r.data),
-      datasets:[{data:Object.values(r.data)}]
-    }
-  });
-});
-</script>
+.card{
+  padding:20px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+  animation:fadeIn 0.8s ease;
+}
+
+.big{
+  font-size:28px;
+  font-weight:bold;
+}
+
+.table{
+  width:100%;
+  margin-top:20px;
+  border-collapse:collapse;
+}
+
+.table th, .table td{
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.status-aktif{color:#00ffcc;}
+.status-pending{color:orange;}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🏋️ Admin Dashboard</h2>
+
+<!-- KPI -->
+<div class="grid">
+  <div class="card">
+    <div>Total Member</div>
+    <div id="total" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <div>Aktif</div>
+    <div id="aktif" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <div>Pending</div>
+    <div id="pending" class="big">0</div>
+  </div>
+</div>
+
+<!-- Grafik -->
+<div class="card">
+  <h3>Statistik Kehadiran</h3>
+  <canvas id="chart"></canvas>
+</div>
+
+<!-- Tabel -->
+<div class="card">
+  <h3>Data Member</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nama</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="data"></tbody>
+  </table>
+</div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>
