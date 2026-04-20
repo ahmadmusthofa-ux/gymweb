@@ -23,6 +23,10 @@ function loginAdmin(){
 
   },1000);
 }
+function logout(){
+  localStorage.removeItem("admin");
+  location.href = "admin-login.html";
+}
 let scanner;
 
 function startScan(){
