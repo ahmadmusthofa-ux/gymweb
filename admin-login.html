@@ -1,6 +1,101 @@
-<h2>Admin Login</h2>
-<input id="email" placeholder="Username">
-<input id="password" type="password" placeholder="Password">
-<button onclick="loginAdmin()">Login</button>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family:'Segoe UI';
+}
+
+.card{
+  width:350px;
+  padding:30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  text-align:center;
+  animation:fadeIn 0.8s ease;
+}
+
+.logo{
+  width:80px;
+  margin-bottom:10px;
+}
+
+h2{
+  margin-bottom:20px;
+  color:white;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#00c6ff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#0099cc;
+}
+
+.loader{
+  display:none;
+  margin-top:10px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1;}
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+  <!-- LOGO -->
+  <img src="assets/logo.png" class="logo">
+
+  <h2>Admin Panel</h2>
+
+  <input id="email" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="loginAdmin()">Login</button>
+
+  <!-- LOADING -->
+  <div class="loader" id="loader">⏳ Loading...</div>
+
 </div>
+
 <script src="js/admin.js"></script>
+
+</body>
+</html>
